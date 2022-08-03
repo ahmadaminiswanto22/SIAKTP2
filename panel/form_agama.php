@@ -1,6 +1,6 @@
 <?php
 include 'header.php';
-
+include 'koneksi/koneksi.php';
 if ($_SESSION['hak_akses'] != 'admin') {
     echo "
     <script>
@@ -8,6 +8,35 @@ if ($_SESSION['hak_akses'] != 'admin') {
         document.location.href='index.php';
     </script>
     ";
+}
+
+if (isset($_POST['simpan'])) {
+    $id_agama = htmlspecialchars($_POST['id_agama']);
+    $nama_agama = htmlspecialchars($_POST['nama_agama']);
+    $tgl_input = htmlspecialchars($_POST['tgl_input']);
+    $user_input = htmlspecialchars($_POST['user_input']);
+    $id_user = htmlspecialchars($_POST['user_input']);
+
+    mysqli_query($conn, "INSERT INTO agama VALUES('$id_agama','$nama_agama','$tgl_input','$user_input','','','$id_user')");
+
+    // var_dump($cek);
+    // exit();
+
+    if (mysqli_affected_rows($conn) > 0) {
+        echo "
+        <script>
+            alert('Data Agama Berhasil dibuat');
+            document.location.href='data_agama.php';
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+            alert('Data Agama Gagal dibuat');
+            document.location.href='form_agama.php';
+        </script>
+        ";
+    }
 }
 ?>
 
@@ -23,53 +52,46 @@ if ($_SESSION['hak_akses'] != 'admin') {
                 </div>
                 <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form method="post" action="" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_agama">ID Agama<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="first-name" required="required" class="form-control ">
+                                <input type="text" name="id_agama" id="id_agama" required="required" class="form-control ">
                             </div>
                         </div>
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Last Name <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_agama">Nama Agama <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="last-name" name="last-name" required="required" class="form-control">
+                                <input type="text" id="nama_agama" name="nama_agama" required="required" class="form-control">
                             </div>
                         </div>
+
                         <div class="item form-group">
-                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Middle Name / Initial</label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input id="middle-name" class="form-control" type="text" name="middle-name">
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Gender</label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <div id="gender" class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                        <input type="radio" name="gender" value="male" class="join-btn"> &nbsp; Male &nbsp;
-                                    </label>
-                                    <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                        <input type="radio" name="gender" value="female" class="join-btn"> Female
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Date Of Birth <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Input <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input id="birthday" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" required="required" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
-                                <script>
-                                    function timeFunctionLong(input) {
-                                        setTimeout(function() {
-                                            input.type = 'text';
-                                        }, 60000);
+                                <input id="tgl_input" name="tgl_input" class="date-picker form-control" type="date" required="required">
+
+
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align ">User Input</label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <select class="form-control" name="user_input" id="user_input">
+                                    <option>Pilih User</option>
+                                    <?php
+                                    $sql = mysqli_query($conn, "SELECT * FROM user");
+                                    while ($data = mysqli_fetch_assoc($sql)) {
+                                    ?>
+                                        <option value="<?= $data['id_user'] ?>"><?= $data['nama'] ?></option>
+                                    <?php
                                     }
-                                </script>
+                                    ?>
+                                </select>
                             </div>
                         </div>
                         <div class="ln_solid"></div>
@@ -77,7 +99,7 @@ if ($_SESSION['hak_akses'] != 'admin') {
                             <div class="col-md-6 col-sm-6 offset-md-3">
                                 <button class="btn btn-primary" type="button">Cancel</button>
                                 <button class="btn btn-warning" type="reset">Reset</button>
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="submit" class="btn btn-success" name="simpan">Submit</button>
                             </div>
                         </div>
 

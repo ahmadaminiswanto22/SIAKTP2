@@ -50,16 +50,14 @@ if ($_SESSION['hak_akses'] != 'admin') {
                                 <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>No</th>
+                                            <th>Nama Agama</th>
+                                            <th>Tgl Input</th>
+                                            <th>User Input</th>
+                                            <th>Tgl Update</th>
+                                            <th>User Update</th>
                                         </tr>
                                     </thead>
-
-
                                     <tbody>
                                         <tr>
                                             <td>Tiger Nixon</td>
