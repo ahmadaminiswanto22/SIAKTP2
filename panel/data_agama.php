@@ -42,7 +42,7 @@ if ($_SESSION['hak_akses'] != 'admin') {
                                             Cetak Data
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Cetak Excel</a>
+                                            <a class="dropdown-item" href="laporan/excel_agama.php">Cetak Excel</a>
                                             <a class="dropdown-item" href="#">Cetak PDF</a>
                                         </div>
                                     </div>
