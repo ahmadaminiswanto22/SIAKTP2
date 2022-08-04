@@ -1,45 +1,47 @@
 <?php
 include 'header.php';
 include 'koneksi/koneksi.php';
-if ($_SESSION['hak_akses'] != 'admin') {
-    echo "
-    <script>
-        alert('Tidak Memiliki Akses, DILARANG MASUK!');
-        document.location.href='index.php';
-    </script>
-    ";
-}
 
 if (isset($_POST['simpan'])) {
     $id_agama = htmlspecialchars($_POST['id_agama']);
     $nama_agama = htmlspecialchars($_POST['nama_agama']);
-    $tgl_input = htmlspecialchars($_POST['tgl_input']);
-    $user_input = htmlspecialchars($_POST['user_input']);
+    $tgl_update = date('Y-m-d');
+    $user_update = htmlspecialchars($_POST['user_update']);
     $id_user = htmlspecialchars($_POST['id_user']);
-
-    mysqli_query($conn, "INSERT INTO agama VALUES('$id_agama','$nama_agama','$tgl_input','$user_input','','','$id_user')");
-
-    // var_dump($cek);
+    $query = "UPDATE agama SET
+            id_agama='$id_agama',
+            nama_agama='$nama_agama',
+            tgl_update='$tgl_update',
+            user_update='$user_update',
+            id_user='$id_user'
+            WHERE id_agama='$id_agama'
+            ";
+    // var_dump($query);
     // exit();
-
+    mysqli_query($conn, $query);
     if (mysqli_affected_rows($conn) > 0) {
         echo "
-        <script>
-            alert('Data Agama Berhasil dibuat');
-            document.location.href='data_agama.php';
-        </script>
-        ";
+            <script>
+                alert('Data Agama Berhasil DiUpdate');
+                document.location.href='data_agama.php';
+            </script>
+            ";
     } else {
         echo "
-        <script>
-            alert('Data Agama Gagal dibuat');
-            document.location.href='form_agama.php';
-        </script>
-        ";
+            <script>
+                alert('Data Agama Gagal Update');
+                document.location.href='data_agama.php';
+            </script>
+            ";
     }
 }
-?>
 
+$data = mysqli_query($conn, "SELECT *
+FROM agama
+INNER JOIN user
+ON agama.id_user = user.id_user WHERE id_agama='" . $_GET['id_agama'] . "'");
+$edit = mysqli_fetch_assoc($data);
+?>
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="clearfix"></div>
@@ -47,7 +49,7 @@ if (isset($_POST['simpan'])) {
         <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Form Input Agama <small>Administrator</small></h2>
+                    <h2>Form Edit Agama <small>Administrator</small></h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -55,39 +57,31 @@ if (isset($_POST['simpan'])) {
                     <form method="post" action="" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_agama">ID Agama<span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_agama">ID Agama<span class="required"></span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" name="id_agama" id="id_agama" required="required" class="form-control ">
+                                <input type="text" name="id_agama" id="id_agama" class="form-control " value="<?= $edit['id_agama']; ?>" readonly>
                             </div>
                         </div>
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_agama">Nama Agama <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_agama">Nama Agama <span class="required"></span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="nama_agama" name="nama_agama" required="required" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Input <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input id="tgl_input" name="tgl_input" class="date-picker form-control" type="date" required="required">
+                                <input type="text" id="nama_agama" name="nama_agama" class="form-control" value="<?= $edit['nama_agama']; ?>">
                             </div>
                         </div>
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="user_input">User Input<span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="user_update">User Update<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="user_input" name="user_input" required="required" class="form-control">
+                                <input type="text" id="user_update" name="user_update" required="required" class="form-control" value="<?= $edit['user_input']; ?>">
                             </div>
                         </div>
                         <div class="item form-group">
                             <label class="col-form-label col-md-3 col-sm-3 label-align ">Akses User</label>
                             <div class="col-md-6 col-sm-6 ">
                                 <select class="form-control" name="id_user" id="id_user">
-                                    <option>Pilih Akses User</option>
+                                    <option value="<?= $edit['id_user'] ?>"><?= $edit['hak_akses'] ?></option>
                                     <?php
                                     $sql = mysqli_query($conn, "SELECT * FROM user");
                                     while ($data = mysqli_fetch_assoc($sql)) {
@@ -104,7 +98,7 @@ if (isset($_POST['simpan'])) {
                             <div class="col-md-6 col-sm-6 offset-md-3">
                                 <!-- <button class="btn btn-primary" type="button">Cancel</button> -->
                                 <button class="btn btn-warning" type="reset">Reset</button>
-                                <button type="submit" class="btn btn-success" name="simpan">Simpan</button>
+                                <button type="submit" class="btn btn-success" name="simpan">Update</button>
                             </div>
                         </div>
 
@@ -116,7 +110,6 @@ if (isset($_POST['simpan'])) {
 
 </div>
 <!-- /page content -->
-
 <?php
 include 'footer.php';
 ?>
