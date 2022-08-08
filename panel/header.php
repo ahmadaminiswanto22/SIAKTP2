@@ -86,7 +86,7 @@ if (!isset($_SESSION['login'])) {
                                     <li><a><i class="fa fa-edit"></i> Master <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="data_agama.php">Agama</a></li>
-                                            <li><a href="#">Kewarganegaraan</a></li>
+                                            <li><a href="data_negara.php">Kewarganegaraan</a></li>
                                             <li><a href="#">Jurusan</a></li>
                                             <li><a href="#">Jenjang</a></li>
                                         </ul>
