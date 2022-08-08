@@ -98,7 +98,7 @@
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
-            <a href="courses.html" class="get-started-btn">PPDB</a>
+            <a href="panel/login.php" class="get-started-btn">PPDB</a>
 
         </div>
     </header><!-- End Header -->
