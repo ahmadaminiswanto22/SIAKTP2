@@ -87,7 +87,7 @@ if (!isset($_SESSION['login'])) {
                                         <ul class="nav child_menu">
                                             <li><a href="data_agama.php">Agama</a></li>
                                             <li><a href="data_negara.php">Kewarganegaraan</a></li>
-                                            <li><a href="#">Jurusan</a></li>
+                                            <li><a href="data_jurusan.php">Jurusan</a></li>
                                             <li><a href="#">Jenjang</a></li>
                                         </ul>
                                     </li>
@@ -133,7 +133,7 @@ if (!isset($_SESSION['login'])) {
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/img.jpg" alt=""> Halo, <?php echo strtoupper($data_user['nama']); ?>
+                                    <img src="images/img.jpg" alt=""> Halo, <?= strtoupper($data_user['nama']); ?>
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" onclick="return confirm('Yakin Ingin Log Out');" href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
