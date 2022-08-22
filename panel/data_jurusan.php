@@ -65,7 +65,7 @@ if ($_SESSION['hak_akses'] != 'admin') {
                                         <?php
                                         include 'koneksi/koneksi.php';
                                         $no = 1;
-                                        $query = "SELECT CONCAT(jenjang.nama_jenjang,' ',jurusan.nama_jurusan) as kelas, jurusan.tgl_input,jurusan.user_input,jurusan.tgl_update,jurusan.user_update,CONCAT(user.hak_akses,' (',user.nama,')') as akses
+                                        $query = "SELECT id_jurusan, CONCAT(jenjang.nama_jenjang,' ',jurusan.nama_jurusan) as kelas, jurusan.tgl_input,jurusan.user_input,jurusan.tgl_update,jurusan.user_update,CONCAT(user.hak_akses,' (',user.nama,')') as akses
                                         FROM jurusan
                                         INNER JOIN jenjang
                                         ON jurusan.id_jenjang = jenjang.id_jenjang JOIN user ON jurusan.id_user = user.id_user";
