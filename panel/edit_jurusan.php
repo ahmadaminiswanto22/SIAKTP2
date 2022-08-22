@@ -31,14 +31,14 @@ if (isset($_POST['simpan'])) {
     if (mysqli_affected_rows($conn) > 0) {
         echo "
             <script>
-                alert('Data Agama Berhasil DiUpdate');
+                alert('Data Jurusan Berhasil DiUpdate');
                 document.location.href='data_jurusan.php';
             </script>
             ";
     } else {
         echo "
             <script>
-                alert('Data Agama Gagal Update');
+                alert('Data Jurusan Gagal Update');
                 document.location.href='data_jurusan.php';
             </script>
             ";
