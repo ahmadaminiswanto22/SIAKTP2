@@ -27,7 +27,7 @@ if ($_SESSION['hak_akses'] != 'admin') {
         <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Data Jurusan <small>Administrator</small></h2>
+                    <h2>Data Jenjang <small>Administrator</small></h2>
 
                     <div class="clearfix"></div>
                 </div>
@@ -36,13 +36,13 @@ if ($_SESSION['hak_akses'] != 'admin') {
                         <div class="col-sm-12">
                             <div class="card-box table-responsive">
                                 <div class="text-muted font-12 m-b-30 mb-2">
-                                    <a href="form_jurusan.php" type="button" class="btn btn-round btn-success ml-2"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data</a>
+                                    <a href="form_jenjang.php" type="button" class="btn btn-round btn-success ml-2"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data</a>
                                     <div class="btn-group float-right">
                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-print" aria-hidden="true"></i>
                                             Cetak Data
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="laporan/excel_jurusan.php">Cetak Excel</a>
+                                            <a class="dropdown-item" href="laporan/excel_jenjang.php">Cetak Excel</a>
                                             <a class="dropdown-item" href="#">Cetak PDF</a>
                                         </div>
                                     </div>
@@ -51,12 +51,11 @@ if ($_SESSION['hak_akses'] != 'admin') {
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Kelas</th>
+                                            <th>Nama Jenjang</th>
                                             <th>Tgl Input</th>
                                             <th>User Input</th>
                                             <th>Tgl Update</th>
                                             <th>User Update</th>
-                                            <th>Akses</th>
                                             <th>Update</th>
                                             <th>Delete</th>
                                         </tr>
@@ -66,23 +65,19 @@ if ($_SESSION['hak_akses'] != 'admin') {
                                         include 'koneksi/koneksi.php';
                                         $no = 1;
                                         $query = "SELECT *
-                                        FROM jurusan
-                                        INNER JOIN user
-                                        ON jurusan.id_user = user.id_user JOIN jenjang ON jurusan.id_jenjang = jenjang.id_jenjang";
+                                        FROM jenjang";
                                         $sql = mysqli_query($conn, $query);
                                         while ($data = mysqli_fetch_assoc($sql)) {
                                         ?>
                                             <tr>
                                                 <td><?= $no++; ?></td>
-                                                <td><?= $data['nama_jurusan'];
-                                                    $data['nama_jenjang']; ?></td>
+                                                <td><?= $data['nama_jenjang']; ?></td>
                                                 <td><?= $data['tgl_input']; ?></td>
                                                 <td><?= $data['user_input']; ?></td>
                                                 <td><?= $data['tgl_update']; ?></td>
                                                 <td><?= $data['user_update']; ?></td>
-                                                <td><?= $data['hak_akses']; ?></td>
-                                                <td><a class="btn btn-warning" type="button" href="edit_jurusan.php?id_jurusan=<?= $data['id_jurusan']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                                                <td><a class="btn btn-danger" type="button" onclick="return confirm('Data akan di Hapus?')" href="hapus_jurusan.php?id_jurusan=<?= $data['id_jurusan']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                                <td><a class="btn btn-warning" type="button" href="edit_jenjang.php?id_jenjang=<?= $data['id_jenjang']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                                                <td><a class="btn btn-danger" type="button" onclick="return confirm('Data akan di Hapus?')" href="hapus_jenjang.php?id_jenjang=<?= $data['id_jenjang']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                                             </tr>
                                         <?php
                                         }

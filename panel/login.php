@@ -32,6 +32,7 @@ if (isset($_POST['login'])) {
     //cek password
     $row = mysqli_fetch_assoc($cek);
     $_SESSION['nama'] = $row['nama'];
+    $_SESSION['id_user'] = $row['id_user'];
     if ($row['hak_akses'] == 'admin') {
       $_SESSION['username'] = $username;
       $_SESSION['hak_akses'] = 'admin';

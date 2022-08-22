@@ -11,19 +11,18 @@ if ($_SESSION['hak_akses'] != 'admin') {
 }
 
 if (isset($_POST['simpan'])) {
-    $id_jurusan = htmlspecialchars($_POST['id_jurusan']);
-    $nama_jurusan = htmlspecialchars($_POST['nama_jurusan']);
+    $id_jenjang = htmlspecialchars($_POST['id_jenjang']);
+    $nama_jenjang = htmlspecialchars($_POST['nama_jenjang']);
     $tgl_update = date('Y-m-d');
     $user_update = htmlspecialchars($_POST['user_update']);
     $id_user = htmlspecialchars($_POST['id_user']);
 
-    $query = "UPDATE jurusan SET
-            id_jurusan='$id_jurusan',
-            nama_jurusan='$nama_jurusan',
+    $query = "UPDATE jenjang SET
+            id_jenjang='$id_jenjang',
+            nama_jenjang='$nama_jenjang',
             tgl_update='$tgl_update',
-            user_update='$user_update',
-            id_user='$id_user'
-            WHERE id_jurusan='$id_jurusan'
+            user_update='$user_update'
+            WHERE id_jenjang='$id_jenjang'
             ";
     // var_dump($query);
     // exit();
@@ -31,24 +30,22 @@ if (isset($_POST['simpan'])) {
     if (mysqli_affected_rows($conn) > 0) {
         echo "
             <script>
-                alert('Data Agama Berhasil DiUpdate');
-                document.location.href='data_jurusan.php';
+                alert('Data Jenjang Berhasil DiUpdate');
+                document.location.href='data_jenjang.php';
             </script>
             ";
     } else {
         echo "
             <script>
-                alert('Data Agama Gagal Update');
-                document.location.href='data_jurusan.php';
+                alert('Data Jenjang Gagal Update');
+                document.location.href='data_jenjang.php';
             </script>
             ";
     }
 }
 
 $data = mysqli_query($conn, "SELECT *
-FROM jurusan
-INNER JOIN user
-ON jurusan.id_user = user.id_user WHERE id_jurusan='" . $_GET['id_jurusan'] . "'");
+FROM jenjang");
 $edit = mysqli_fetch_assoc($data);
 ?>
 ?>
@@ -60,7 +57,7 @@ $edit = mysqli_fetch_assoc($data);
         <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Form Edit Jurusan <small>Administrator</small></h2>
+                    <h2>Form Edit Jenjang <small>Administrator</small></h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -68,17 +65,17 @@ $edit = mysqli_fetch_assoc($data);
                     <form method="post" action="" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_jurusan">ID Jurusan<span class="required"></span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_jenjang">ID Jenjang<span class="required"></span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" name="id_jurusan" id="id_jurusan" required="required" class="form-control " value="<?= $edit['id_jurusan']; ?>" readonly>
+                                <input type="text" name="id_jenjang" id="id_jenjang" required="required" class="form-control " value="<?= $edit['id_jenjang']; ?>" readonly>
                             </div>
                         </div>
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_jurusan">Nama Jurusan <span class="required"></span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_jenjang">Nama Jenjang <span class="required"></span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="nama_jurusan" name="nama_jurusan" required="required" class="form-control" value="<?= $edit['nama_jurusan']; ?>">
+                                <input type="text" id="nama_jenjang" name="nama_jenjang" required="required" class="form-control" value="<?= $edit['nama_jenjang']; ?>">
                             </div>
                         </div>
                         <div class="item form-group">
@@ -88,22 +85,7 @@ $edit = mysqli_fetch_assoc($data);
                                 <input type="text" id="user_update" name="user_update" required="required" class="form-control" value="<?= $edit['user_input']; ?>">
                             </div>
                         </div>
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Akses User</label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <select class="form-control" name="id_user" id="id_user">
-                                    <option value="<?= $edit['id_user'] ?>"><?= $edit['hak_akses'] ?></option>
-                                    <?php
-                                    $sql = mysqli_query($conn, "SELECT * FROM user");
-                                    while ($data = mysqli_fetch_assoc($sql)) {
-                                    ?>
-                                        <option value="<?= $data['id_user'] ?>"><?= $data['hak_akses'] ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
+
                         <div class="ln_solid"></div>
                         <div class="item form-group">
                             <div class="col-md-6 col-sm-6 offset-md-3">

@@ -64,7 +64,7 @@ if (!isset($_SESSION['login'])) {
                         <div class="profile_info">
                             <?php
                             include 'koneksi/koneksi.php';
-                            $sql_user = mysqli_query($conn, "SELECT * FROM user WHERE hak_akses = '$status'");
+                            $sql_user = mysqli_query($conn, "SELECT * FROM user WHERE hak_akses = '$status' AND id_user='$_SESSION[id_user];'");
                             $data_user = mysqli_fetch_assoc($sql_user);
                             ?>
                             <span>Welcome,</span>
@@ -88,7 +88,7 @@ if (!isset($_SESSION['login'])) {
                                             <li><a href="data_agama.php">Agama</a></li>
                                             <li><a href="data_negara.php">Kewarganegaraan</a></li>
                                             <li><a href="data_jurusan.php">Jurusan</a></li>
-                                            <li><a href="#">Jenjang</a></li>
+                                            <li><a href="data_jenjang.php">Jenjang</a></li>
                                         </ul>
                                     </li>
                                 <?php } ?>
