@@ -65,22 +65,21 @@ if ($_SESSION['hak_akses'] != 'admin') {
                                         <?php
                                         include 'koneksi/koneksi.php';
                                         $no = 1;
-                                        $query = "SELECT *
+                                        $query = "SELECT CONCAT(jenjang.nama_jenjang,' ',jurusan.nama_jurusan) as kelas, jurusan.tgl_input,jurusan.user_input,jurusan.tgl_update,jurusan.user_update,CONCAT(user.hak_akses,' (',user.nama,')') as akses
                                         FROM jurusan
-                                        INNER JOIN user
-                                        ON jurusan.id_user = user.id_user JOIN jenjang ON jurusan.id_jenjang = jenjang.id_jenjang";
+                                        INNER JOIN jenjang
+                                        ON jurusan.id_jenjang = jenjang.id_jenjang JOIN user ON jurusan.id_user = user.id_user";
                                         $sql = mysqli_query($conn, $query);
                                         while ($data = mysqli_fetch_assoc($sql)) {
                                         ?>
                                             <tr>
                                                 <td><?= $no++; ?></td>
-                                                <td><?= $data['nama_jurusan'];
-                                                    $data['nama_jenjang']; ?></td>
+                                                <td><?= $data['kelas']; ?></td>
                                                 <td><?= $data['tgl_input']; ?></td>
                                                 <td><?= $data['user_input']; ?></td>
                                                 <td><?= $data['tgl_update']; ?></td>
                                                 <td><?= $data['user_update']; ?></td>
-                                                <td><?= $data['hak_akses']; ?></td>
+                                                <td><?= $data['akses']; ?></td>
                                                 <td><a class="btn btn-warning" type="button" href="edit_jurusan.php?id_jurusan=<?= $data['id_jurusan']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                                                 <td><a class="btn btn-danger" type="button" onclick="return confirm('Data akan di Hapus?')" href="hapus_jurusan.php?id_jurusan=<?= $data['id_jurusan']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                                             </tr>
