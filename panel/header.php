@@ -92,7 +92,7 @@ if (!isset($_SESSION['login'])) {
                                         </ul>
                                     </li>
                                 <?php } ?>
-                                <li><a href="#"><i class="fa fa-desktop"></i>Pendaftaran</a>
+                                <li><a href="form_pendaftaran.php"><i class="fa fa-desktop"></i>Pendaftaran</a>
                                 </li>
                                 <li><a href="data_pendaftaran.php"><i class="fa fa-bar-chart-o"></i> Data Pendaftaran</a>
                                 </li>
