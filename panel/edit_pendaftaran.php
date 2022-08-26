@@ -97,14 +97,28 @@ $edit = mysqli_fetch_assoc($data);
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="jk1">Jenis Kelamin <span class="required"></span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="jk1" name="jk" class="custom-control-input" value="Laki-laki" checked>
-                                    <label class="custom-control-label" for="jk">Laki - Laki</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="jk2" name="jk" class="custom-control-input" value="Perempuan">
-                                    <label class="custom-control-label" for="jk2">Perempuan</label>
-                                </div>
+                                <?php if (
+                                    $edit['jenis_kelamin'] ==
+                                    'Laki-laki'
+                                ) { ?>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="jk1" name="jk" class="custom-control-input" value="Laki-laki" checked>
+                                        <label class="custom-control-label" for="jk1">Laki - Laki</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="jk2" name="jk" class="custom-control-input" value="Perempuan">
+                                        <label class="custom-control-label" for="jk2">Perempuan</label>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="jk1" name="jk" class="custom-control-input" value="Laki-laki">
+                                        <label class="custom-control-label" for="jk1">Laki - Laki</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="jk2" name="jk" class="custom-control-input" value="Perempuan" checked>
+                                        <label class="custom-control-label" for="jk2">Perempuan</label>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="item form-group">
