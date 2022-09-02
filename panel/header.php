@@ -104,7 +104,7 @@ if (!isset($_SESSION['login'])) {
                                 <ul class="nav side-menu">
                                     <li><a href="registrasi.php"><i class="fa fa-user-plus"></i>Registrasi User</a>
                                     </li>
-                                    <li><a><i class="fa fa-users"></i>Data User</a>
+                                    <li><a href="data_user.php"><i class="fa fa-users"></i>Data User</a>
                                     </li>
                                 </ul>
                             </div>

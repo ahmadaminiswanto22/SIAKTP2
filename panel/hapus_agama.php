@@ -1,6 +1,6 @@
 <?php
 include 'koneksi/koneksi.php';
-mysqli_query($conn, "DELETE FROM agama WHERE id_agama='" . $_GET['id_agama'] . "'");
+mysqli_query($conn, "DELETE FROM agama JOIN pendaftaran ON agama.id_agama = pendaftaran.id_agama WHERE id_agama='" . $_GET['id_agama'] . "'");
 if (mysqli_affected_rows($conn) > 0) {
     echo "
         <script>
