@@ -41,7 +41,7 @@ if (isset($_POST['login'])) {
         $_SESSION['login'] = true;
         //buat dan cek cookie
         if (isset($_POST['remember'])) {
-          setcookie('id', $row['id'], time() + 60);
+          setcookie('id', $row['id_user'], time() + 60);
           setcookie('key', hash('sha256', $row['username']), time() + 60);
         }
         echo "
@@ -59,7 +59,7 @@ if (isset($_POST['login'])) {
         $_SESSION['login'] = true;
         //buat dan cek cookie
         if (isset($_POST['remember'])) {
-          setcookie('id', $row['id'], time() + 60);
+          setcookie('id', $row['id_user'], time() + 60);
           setcookie('key', hash('sha256', $row['username']), time() + 60);
         }
         echo "
@@ -126,10 +126,10 @@ if (isset($_POST['login'])) {
             }
             ?>
             <div>
-              <input type="text" class="form-control" name="username" id="username" placeholder="Username" required="" />
+              <input type="text" class="form-control" name="username" id="username" placeholder="Username" />
             </div>
             <div>
-              <input type="password" class="form-control" name="password" id="password" placeholder="Password" required="" />
+              <input type="password" class="form-control" name="password" id="password" placeholder="Password" />
             </div>
             <div class="form-group">
               <div class="form-check">
