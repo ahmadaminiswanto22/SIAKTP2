@@ -92,12 +92,12 @@ $edit = mysqli_fetch_assoc($data);
                             <label class="col-form-label col-md-3 col-sm-3 label-align ">Akses User</label>
                             <div class="col-md-6 col-sm-6 ">
                                 <select class="form-control" name="id_user" id="id_user">
-                                    <option value="<?= $edit['id_user'] ?>"><?= $edit['hak_akses'] ?></option>
+                                    <option value="<?= $edit['id_user'] ?>"><?= $edit['hak_akses'] ?> (<?= $edit['nama'] ?>)</option>
                                     <?php
                                     $sql = mysqli_query($conn, "SELECT * FROM user");
                                     while ($data = mysqli_fetch_assoc($sql)) {
                                     ?>
-                                        <option value="<?= $data['id_user'] ?>"><?= $data['hak_akses'] ?></option>
+                                        <option value="<?= $data['id_user'] ?>"><?= $data['hak_akses'] ?> (<?= $data['nama'] ?>)</option>
                                     <?php
                                     }
                                     ?>

@@ -92,7 +92,7 @@ if (isset($_POST['simpan'])) {
                                     $sql = mysqli_query($conn, "SELECT * FROM user");
                                     while ($data = mysqli_fetch_assoc($sql)) {
                                     ?>
-                                        <option value="<?= $data['id_user'] ?>"><?= $data['hak_akses'] ?></option>
+                                        <option value="<?= $data['id_user'] ?>"><?= $data['hak_akses'] ?> (<?= $data['nama'] ?>)</option>
                                     <?php
                                     }
                                     ?>

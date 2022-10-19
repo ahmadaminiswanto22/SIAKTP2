@@ -47,8 +47,8 @@ if (isset($_POST['simpan'])) {
 
 $data = mysqli_query($conn, "SELECT *
 FROM jurusan
-INNER JOIN user
-ON jurusan.id_user = user.id_user WHERE id_jurusan='" . $_GET['id_jurusan'] . "'");
+LEFT JOIN user
+ON jurusan.id_user = user.id_user LEFT JOIN jenjang ON jurusan.id_jenjang = jenjang.id_jenjang WHERE id_jurusan='" . $_GET['id_jurusan'] . "'");
 $edit = mysqli_fetch_assoc($data);
 ?>
 ?>
@@ -82,6 +82,22 @@ $edit = mysqli_fetch_assoc($data);
                             </div>
                         </div>
                         <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Jenjang</label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <select class="form-control" name="id_jenjang" id="id_jenjang">
+                                    <option value="<?= $edit['id_jenjang'] ?>"><?= $edit['nama_jenjang'] ?></option>
+                                    <?php
+                                    $sql = mysqli_query($conn, "SELECT * FROM jenjang");
+                                    while ($data = mysqli_fetch_assoc($sql)) {
+                                    ?>
+                                        <option value="<?= $data['id_jenjang'] ?>"><?= $data['nama_jenjang'] ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="item form-group">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="user_input">User Update<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
@@ -92,12 +108,12 @@ $edit = mysqli_fetch_assoc($data);
                             <label class="col-form-label col-md-3 col-sm-3 label-align ">Akses User</label>
                             <div class="col-md-6 col-sm-6 ">
                                 <select class="form-control" name="id_user" id="id_user">
-                                    <option value="<?= $edit['id_user'] ?>"><?= $edit['hak_akses'] ?></option>
+                                    <option value="<?= $edit['id_user'] ?>"><?= $edit['hak_akses'] ?> (<?= $edit['nama'] ?>)</option>
                                     <?php
                                     $sql = mysqli_query($conn, "SELECT * FROM user");
                                     while ($data = mysqli_fetch_assoc($sql)) {
                                     ?>
-                                        <option value="<?= $data['id_user'] ?>"><?= $data['hak_akses'] ?></option>
+                                        <option value="<?= $data['id_user'] ?>"><?= $data['hak_akses'] ?> (<?= $data['nama'] ?>)</option>
                                     <?php
                                     }
                                     ?>
