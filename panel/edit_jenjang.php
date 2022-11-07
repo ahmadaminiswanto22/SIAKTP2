@@ -9,7 +9,6 @@ if ($_SESSION['hak_akses'] != 'admin') {
     </script>
     ";
 }
-
 if (isset($_POST['simpan'])) {
     $id_jenjang = htmlspecialchars($_POST['id_jenjang']);
     $nama_jenjang = htmlspecialchars($_POST['nama_jenjang']);
