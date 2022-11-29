@@ -89,7 +89,7 @@ if (isset($_POST['simpan'])) {
                                 <select class="form-control" name="id_user" id="id_user">
                                     <option>Pilih Akses User</option>
                                     <?php
-                                    $sql = mysqli_query($conn, "SELECT * FROM user");
+                                    $sql = mysqli_query($conn, "SELECT * FROM user WHERE hak_akses = '$status' AND id_user='$_SESSION[id_user];'");
                                     while ($data = mysqli_fetch_assoc($sql)) {
                                     ?>
                                         <option value="<?= $data['id_user'] ?>"><?= $data['hak_akses'] ?> (<?= $data['nama'] ?>)</option>

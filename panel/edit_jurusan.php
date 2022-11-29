@@ -107,10 +107,10 @@ $edit = mysqli_fetch_assoc($data);
                         <div class="item form-group">
                             <label class="col-form-label col-md-3 col-sm-3 label-align ">Akses User</label>
                             <div class="col-md-6 col-sm-6 ">
-                                <select class="form-control" name="id_user" id="id_user">
+                                <select class="form-control" name="id_user" id="id_user ">
                                     <option value="<?= $edit['id_user'] ?>"><?= $edit['hak_akses'] ?> (<?= $edit['nama'] ?>)</option>
                                     <?php
-                                    $sql = mysqli_query($conn, "SELECT * FROM user");
+                                    $sql = mysqli_query($conn, "SELECT * FROM user WHERE hak_akses = '$status' AND id_user='$_SESSION[id_user];'");
                                     while ($data = mysqli_fetch_assoc($sql)) {
                                     ?>
                                         <option value="<?= $data['id_user'] ?>"><?= $data['hak_akses'] ?> (<?= $data['nama'] ?>)</option>
