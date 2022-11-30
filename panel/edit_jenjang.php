@@ -44,7 +44,7 @@ if (isset($_POST['simpan'])) {
 }
 
 $data = mysqli_query($conn, "SELECT *
-FROM jenjang");
+FROM jenjang WHERE id_jenjang='" . $_GET['id_jenjang'] . "'");
 $edit = mysqli_fetch_assoc($data);
 ?>
 ?>
