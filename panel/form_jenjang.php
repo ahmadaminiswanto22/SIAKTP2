@@ -16,6 +16,18 @@ if (isset($_POST['simpan'])) {
     $tgl_input = htmlspecialchars($_POST['tgl_input']);
     $user_input = htmlspecialchars($_POST['user_input']);
 
+    //cek id sudah terdaftar belum
+    $result = mysqli_query($conn, "SELECT id_jenjang FROM jenjang WHERE id_jenjang = '$id_jenjang'");
+    if (mysqli_fetch_assoc($result)) {
+        echo "
+        <script>
+            alert('ID sudah terdaftar, silahkan ganit!');
+            document.location.href='form_jenjang.php';
+        </script>
+        ";
+        return false;
+    }
+
     mysqli_query($conn, "INSERT INTO jenjang VALUES('$id_jenjang','$nama_jenjang','$tgl_input','$user_input','','')");
 
     // var_dump($cek);

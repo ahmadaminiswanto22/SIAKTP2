@@ -17,6 +17,18 @@ if (isset($_POST['simpan'])) {
     $user_input = htmlspecialchars($_POST['user_input']);
     $id_user = htmlspecialchars($_POST['id_user']);
 
+    //cek id sudah terdaftar belum
+    $result = mysqli_query($conn, "SELECT nis FROM pendaftaran WHERE nis = '$nis'");
+    if (mysqli_fetch_assoc($result)) {
+        echo "
+        <script>
+            alert('ID sudah terdaftar, silahkan ganti!');
+            document.location.href='form_pendaftaran.php';
+        </script>
+        ";
+        return false;
+    }
+
 
     mysqli_query($conn, "INSERT INTO pendaftaran VALUES('$nis','$nama_siswa','$alamat','$jk','$tmp_lahir','$tgl_lahir','$status','$negara','$agama','$kelas','$tgl_input','$user_input','','','$id_user')");
 

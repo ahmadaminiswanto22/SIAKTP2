@@ -17,6 +17,18 @@ if (isset($_POST['simpan'])) {
     $user_input = htmlspecialchars($_POST['user_input']);
     $id_user = htmlspecialchars($_POST['id_user']);
 
+    //cek id sudah terdaftar belum
+    $result = mysqli_query($conn, "SELECT id_agama FROM agama WHERE id_agama = '$id_agama'");
+    if (mysqli_fetch_assoc($result)) {
+        echo "
+        <script>
+            alert('ID sudah terdaftar, silahkan ganit!');
+            document.location.href='form_agama.php';
+        </script>
+        ";
+        return false;
+    }
+
     mysqli_query($conn, "INSERT INTO agama VALUES('$id_agama','$nama_agama','$tgl_input','$user_input','','','$id_user')");
 
     // var_dump($cek);

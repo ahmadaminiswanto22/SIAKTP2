@@ -17,6 +17,18 @@ if (isset($_POST['simpan'])) {
     $user_input = htmlspecialchars($_POST['user_input']);
     $id_user = htmlspecialchars($_POST['id_user']);
 
+    //cek id sudah terdaftar belum
+    $result = mysqli_query($conn, "SELECT id_negara FROM kewarganegaraan WHERE id_negara = '$id_negara'");
+    if (mysqli_fetch_assoc($result)) {
+        echo "
+        <script>
+            alert('ID sudah terdaftar, silahkan ganit!');
+            document.location.href='form_negara.php';
+        </script>
+        ";
+        return false;
+    }
+
     mysqli_query($conn, "INSERT INTO kewarganegaraan VALUES('$id_negara','$nama_negara','$tgl_input','$user_input','','','$id_user')");
 
     // var_dump($cek);

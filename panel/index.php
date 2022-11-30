@@ -1,34 +1,41 @@
 <?php
 include 'header.php';
+include 'koneksi/koneksi.php';
+$RPL = mysqli_num_rows(mysqli_query($conn, "SELECT jurusan.id_jurusan, jurusan.nama_jurusan, pendaftaran.id_jurusan FROM pendaftaran JOIN jurusan ON jurusan.id_jurusan=pendaftaran.id_jurusan WHERE jurusan.nama_jurusan='RPL'"));
+$MM = mysqli_num_rows(mysqli_query($conn, "SELECT jurusan.id_jurusan, jurusan.nama_jurusan, pendaftaran.id_jurusan FROM pendaftaran JOIN jurusan ON jurusan.id_jurusan=pendaftaran.id_jurusan WHERE jurusan.nama_jurusan='MM'"));
+$MP = mysqli_num_rows(mysqli_query($conn, "SELECT jurusan.id_jurusan, jurusan.nama_jurusan, pendaftaran.id_jurusan FROM pendaftaran JOIN jurusan ON jurusan.id_jurusan=pendaftaran.id_jurusan WHERE jurusan.nama_jurusan='MP'"));
+$AKL = mysqli_num_rows(mysqli_query($conn, "SELECT jurusan.id_jurusan, jurusan.nama_jurusan, pendaftaran.id_jurusan FROM pendaftaran JOIN jurusan ON jurusan.id_jurusan=pendaftaran.id_jurusan WHERE jurusan.nama_jurusan='AKL'"));
+$BDP = mysqli_num_rows(mysqli_query($conn, "SELECT jurusan.id_jurusan, jurusan.nama_jurusan, pendaftaran.id_jurusan FROM pendaftaran JOIN jurusan ON jurusan.id_jurusan=pendaftaran.id_jurusan WHERE jurusan.nama_jurusan='BDP'"));
+$PKM = mysqli_num_rows(mysqli_query($conn, "SELECT jurusan.id_jurusan, jurusan.nama_jurusan, pendaftaran.id_jurusan FROM pendaftaran JOIN jurusan ON jurusan.id_jurusan=pendaftaran.id_jurusan WHERE jurusan.nama_jurusan='PKM'"));
 ?>
 <!-- page content -->
 <div class="right_col" role="main">
   <!-- top tiles -->
   <div class="row" style="display: inline-block;">
     <div class="tile_count">
-      <div class="col-md-2 col-sm-4  tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> RPL</span>
-        <div class="count">200</div>
+      <div class="col-md-2 col-4  tile_stats_count">
+        <span class="count_top "><i class="fa fa-user"></i> RPL</span>
+        <div class="count pr-5"><?= $RPL; ?></div>
       </div>
-      <div class="col-md-2 col-sm-4  tile_stats_count">
+      <div class="col-md-2 col-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-user"></i> DKV</span>
-        <div class="count">235</div>
+        <div class="count"> <?= $MM; ?></div>
       </div>
-      <div class="col-md-2 col-sm-4  tile_stats_count">
+      <div class="col-md-2 col-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-user"></i> MP</span>
-        <div class="count">200</div>
+        <div class="count"> <?= $MP; ?></div>
       </div>
-      <div class="col-md-2 col-sm-4  tile_stats_count">
+      <div class="col-md-2 col-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-user"></i> AKL</span>
-        <div class="count">167</div>
+        <div class="count"> <?= $AKL; ?></div>
       </div>
-      <div class="col-md-2 col-sm-4  tile_stats_count">
+      <div class="col-md-2 col-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-user"></i> BDP</span>
-        <div class="count">315</div>
+        <div class="count"> <?= $BDP; ?></div>
       </div>
-      <div class="col-md-2 col-sm-4  tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> BDP</span>
-        <div class="count">325</div>
+      <div class="col-md-2 col-4  tile_stats_count">
+        <span class="count_top "><i class="fa fa-user"></i> PKM</span>
+        <div class="count pr-5"> <?= $PKM; ?></div>
       </div>
     </div>
   </div>
@@ -148,7 +155,7 @@ include 'header.php';
     <div class="col-md-5 col-sm-5 ">
       <div class="x_panel tile fixed_height_320 overflow_hidden">
         <div class="x_title">
-          <h2>Device Usage</h2>
+          <h2>Presentase Siswa</h2>
           <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
@@ -168,11 +175,11 @@ include 'header.php';
           <table class="" style="width:100%">
             <tr>
               <th style="width:37%;">
-                <p>Top 5</p>
+                <p>Presentase</p>
               </th>
               <th>
                 <div class="col-lg-7 col-md-7 col-sm-7 ">
-                  <p class="">Device</p>
+                  <p class="">Jurusan</p>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-5 ">
                   <p class="">Progress</p>
@@ -187,33 +194,39 @@ include 'header.php';
                 <table class="tile_info">
                   <tr>
                     <td>
-                      <p><i class="fa fa-square blue"></i>IOS </p>
+                      <p><i class="fa fa-square blue"></i>DKV </p>
                     </td>
                     <td>30%</td>
                   </tr>
                   <tr>
                     <td>
-                      <p><i class="fa fa-square green"></i>Android </p>
+                      <p><i class="fa fa-square green"></i>BDP </p>
                     </td>
                     <td>10%</td>
                   </tr>
                   <tr>
                     <td>
-                      <p><i class="fa fa-square purple"></i>Blackberry </p>
+                      <p><i class="fa fa-square purple"></i>AKL </p>
                     </td>
                     <td>20%</td>
                   </tr>
                   <tr>
                     <td>
-                      <p><i class="fa fa-square aero"></i>Symbian </p>
+                      <p><i class="fa fa-square aero"></i>MP </p>
                     </td>
                     <td>15%</td>
                   </tr>
                   <tr>
                     <td>
-                      <p><i class="fa fa-square red"></i>Others </p>
+                      <p><i class="fa fa-square red"></i>RPL </p>
                     </td>
-                    <td>30%</td>
+                    <td>15%</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p><i class="fa fa-square Gold"></i>PKM </p>
+                    </td>
+                    <td>15%</td>
                   </tr>
                 </table>
               </td>

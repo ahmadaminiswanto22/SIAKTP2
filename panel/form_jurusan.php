@@ -18,6 +18,19 @@ if (isset($_POST['simpan'])) {
     $id_user = htmlspecialchars($_POST['id_user']);
     $id_jenjang = htmlspecialchars($_POST['id_jenjang']);
 
+    //cek id sudah terdaftar belum
+    $result = mysqli_query($conn, "SELECT id_jurusan FROM jurusan WHERE id_jurusan = '$id_jurusan'");
+    if (mysqli_fetch_assoc($result)) {
+        echo "
+        <script>
+            alert('ID sudah terdaftar, silahkan ganit!');
+            document.location.href='form_jurusan.php';
+        </script>
+        ";
+        return false;
+    }
+
+
     mysqli_query($conn, "INSERT INTO jurusan VALUES('$id_jurusan','$nama_jurusan','$id_jenjang','$tgl_input','$user_input','','','$id_user')");
 
     // var_dump($cek);
