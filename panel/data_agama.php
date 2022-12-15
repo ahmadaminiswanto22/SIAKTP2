@@ -37,7 +37,8 @@ if ($_SESSION['hak_akses'] != 'admin') {
                             <div class="card-box table-responsive">
                                 <div class="text-muted font-12 m-b-30 mb-2">
                                     <a href="form_agama.php" type="button" class="btn btn-round btn-success ml-2"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data</a>
-                                    <div class="btn-group float-right">
+                                    <div class="btn float-right">
+                                        <a class="btn btn-primary" href="upload_agama.php" role="button"><i class="fa fa-upload" aria-hidden="true"></i> Upload Data</a>
                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-print" aria-hidden="true"></i>
                                             Cetak Data
                                         </button>

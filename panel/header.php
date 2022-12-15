@@ -1,6 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['login'])) {
+
 ?>
     <script>
         alert("SILAHKAN LOGIN!");
@@ -98,7 +99,9 @@ if (!isset($_SESSION['login'])) {
                                 </li>
                             </ul>
                         </div>
-                        <?php if ($status == 'admin') { ?>
+                        <?php
+                        if ($status == 'admin') {
+                        ?>
                             <div class="menu_section">
                                 <h3>Setting User</h3>
                                 <ul class="nav side-menu">
