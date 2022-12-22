@@ -35,19 +35,19 @@ if (isset($_POST["submit"])) {
 
         $jumlahData = 0;
         for ($i = 2; $i < count($sheetData); $i++) {
-            $id_agama = $sheetData[$i]['1'];
-            $nama_agama = $sheetData[$i]['2'];
+            $id_jenjang = $sheetData[$i]['1'];
+            $nama_jenjang = $sheetData[$i]['2'];
             $tgl_input = $sheetData[$i]['3'];
             $user_input = $sheetData[$i]['4'];
-            $id_user = $sheetData[$i]['5'];
+            // $id_user = $sheetData[$i]['5'];
             // $user_update = $sheetData[$i]['6'];
 
-            // echo "$id_agama - $nama_agama - $tgl_input - $user_input <br/>";
+            // echo "$id_jenjang - $nama_jenjang - $tgl_input - $user_input <br/>";
 
             $date_explode = explode("/", $tgl_input);
-            $date = $date_explode['2'] . "-" . $date_explode[0] . "-" . $date_explode['1'];
+            @$date = $date_explode['2'] . "-" . $date_explode[0] . "-" . $date_explode['1'];
 
-            $query = "INSERT INTO agama (id_agama,nama_agama,tgl_input,user_input,id_user) VALUES('$id_agama','$nama_agama','$date','$user_input','$id_user')";
+            $query = "INSERT INTO jenjang (id_jenjang,nama_jenjang,tgl_input,user_input) VALUES('$id_jenjang','$nama_jenjang','$date','$user_input')";
             // var_dump($query);
 
 

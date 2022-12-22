@@ -37,8 +37,11 @@ if ($_SESSION['hak_akses'] != 'admin') {
                             <div class="card-box table-responsive">
                                 <div class="text-muted font-12 m-b-30 mb-2">
                                     <a href="form_jenjang.php" type="button" class="btn btn-round btn-success ml-2"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data</a>
-                                    <div class="btn-group float-right">
-                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-print" aria-hidden="true"></i>
+                                    <div class="btn float-right">
+                                        <a class="btn btn-sm btn-danger" onclick="return confirm('Semua Data Akan Terhapus!')" href="hapus_jenjang.php" role="button"><i class="fa fa-trash" aria-hidden="true"></i> Delete All</a>
+                                        <a class="btn btn-sm btn-info" href="file-excel/template_data_jenjang.xlsx" target="_blank" role="button"><i class="fa fa-cloud-download" aria-hidden="true"></i> Download Template Excel</a>
+                                        <a class="btn btn-sm btn-primary" href="upload_jenjang.php" role="button"><i class="fa fa-upload" aria-hidden="true"></i> Upload Data</a>
+                                        <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-print" aria-hidden="true"></i>
                                             Cetak Data
                                         </button>
                                         <div class="dropdown-menu">
