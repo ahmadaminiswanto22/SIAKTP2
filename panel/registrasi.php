@@ -43,7 +43,9 @@ if (isset($_POST['regis'])) {
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     //simpan data ke database
-    mysqli_query($conn, "INSERT INTO user VALUES('','$username','$password','$nama','$email','$akses')");
+    $pass=mysqli_query($conn, "INSERT INTO user VALUES('','$username','$password','$nama','$email','$akses')");
+    var_dump($pass);
+    exit();
     if (mysqli_affected_rows($conn)) {
         echo "
         <script>

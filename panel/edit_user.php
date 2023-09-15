@@ -78,7 +78,7 @@ $data = mysqli_query($conn, "SELECT *
 FROM user WHERE id_user='" . $_GET['id_user'] . "'");
 $edit = mysqli_fetch_assoc($data);
 ?>
-?>
+
 
 <!-- page content -->
 <div class="right_col" role="main">
