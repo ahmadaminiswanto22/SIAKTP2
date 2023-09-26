@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cetak Surat</title>
+    <title>Cetak Pendaftaran</title>
     <style>
         body {
             width: 680px;
@@ -95,7 +95,7 @@
             text-align: center;
             font-size: 12px;
             line-height: 1px;
-            margin-right: -80px;
+            margin-right: -200px;
         }
     </style>
 </head>
@@ -122,16 +122,6 @@
             </td>
         </tr>
     </table>
-    <?php
-    // foreach ($dtasurat as $sr) 
-    {
-        // $tgl_surat = $sr->tgl_surat;
-        // $nomor = $sr->nomor;
-        // $lampiran = $sr->lampiran;
-        // $perihal = $sr->perihal;
-        // $perusahaan = $sr->perusahaan;
-        // $almt_perusahaan = $sr->almt_perusahaan;
-    ?>
 
         <table class="tgl" border="0">
             <tr>
@@ -141,61 +131,51 @@
                 </td>
             </tr>
         </table>
-        <!-- <table class="nosut" border="0">
-            <tr>
-                <td class="jdl">
-                    <p>Nomor</p>
-                </td>
-                <td class="sm"> :</td>
-                <td>
-                    <p><?php echo $nomor; ?></p>
-                </td>
-            </tr>
-            <tr>
-                <td class="jdl">
-                    </p>Perihal</p>
-                </td>
-                <td class="sm"> :</td>
-                <td>
-                    <p><?php echo $perihal; ?></p>
-                </td>
-            </tr>
-            <tr>
-                <td class="jdl">
-                    <p>Lampiran</p>
-                </td>
-                <td class="sm"> :</td>
-                <td>
-                    <p><?php echo $lampiran; ?></p>
-                </td>
-            </tr>
-
-        </table> -->
-        <!-- <div class="yth">
-            <p>Kepada Yth:</p>
-            <p>Bapak/Ibu</p>
-            <p><?php echo $perusahaan; ?></p>
-            <p><?php echo $almt_perusahaan; ?></p>
-        </div> -->
         <div class="isi">
-            <p><i>Dengan ini, kami menyatakan siswa dengan data di bawah ini sudah melakukan pendaftaran siswa baru: </i></p>
-            <!-- <p class="p1">Teriring salam dan doa semoga Bapak/Ibu berada dalam keadaan sehat walafiat, serta sukses selalu dalam melaksanakan aktifitas sehari - hari. </p> -->
-            <!-- <p class="p1">Dengan ini kami mengajukan permohonan praktek kerja lapanan (PKL) bagi peserta didik kami pada perusahaan/instansi yang Bapak/Ibu pimpin, sebagai pembelajaran pencapaian kompetensi yang saling keterkaitan dan dengan keterpaduan antara sekolah pihak perusahaan. </p>
-            <p>Nama-nama peserta didik yang diajukan adalah sebagai berikut</p> -->
+            <p><i>Dengan ini, kami menyatakan siswa dengan data di bawah ini sudah melakukan pendaftaran siswa baru <br> pada Sekolah SMK Teratai Putih Global 2 Bekasi Tahun Ajaran 2023/2024: </i></p>
             <?php
-            $data = mysqli_query($conn, "SELECT *
-            FROM jenjang WHERE id_jenjang='" . $_GET['id_jenjang'] . "'");
-            $edit = mysqli_fetch_assoc($data);
+            include '../koneksi/koneksi.php';
+            // $data = mysqli_query($conn, "SELECT *
+            // FROM pendaftaran WHERE NIS = 43434 ");
+            $data = mysqli_query($conn, "SELECT pendaftaran.nis,pendaftaran.nama_siswa,pendaftaran.alamat,pendaftaran.jenis_kelamin,pendaftaran.tempat_lahir,pendaftaran.tgl_lahir,pendaftaran.status,kewarganegaraan.id_negara,kewarganegaraan.nama_negara,agama.id_agama,agama.nama_agama,jurusan.id_jurusan, CONCAT(jenjang.nama_jenjang,' ',jurusan.nama_jurusan) as kelas, pendaftaran.tgl_input,pendaftaran.user_input,pendaftaran.tgl_update,pendaftaran.user_update,CONCAT(user.hak_akses,' (',user.nama,')') as akses FROM pendaftaran INNER JOIN kewarganegaraan ON pendaftaran.id_negara = kewarganegaraan.id_negara JOIN user ON pendaftaran.id_user = user.id_user JOIN agama ON pendaftaran.id_agama = agama.id_agama JOIN jurusan ON pendaftaran.id_jurusan = jurusan.id_jurusan JOIN jenjang ON jurusan.id_jenjang = jenjang.id_jenjang WHERE nis = '" . $_GET['nis'] . "' ");
+            $tampil = mysqli_fetch_assoc($data);
+            $tgl_daftar = $tampil['tgl_input'];
+            $tgl_lahir= $tampil['tgl_lahir'];
+            function tgl_indo($tanggal){
+                $bulan = array (
+                    1 =>   'Januari',
+                    'Februari',
+                    'Maret',
+                    'April',
+                    'Mei',
+                    'Juni',
+                    'Juli',
+                    'Agustus',
+                    'September',
+                    'Oktober',
+                    'November',
+                    'Desember'
+                );
+                $pecahkan = explode('-', $tanggal);
+                
+                // variabel pecahkan 0 = tahun
+                // variabel pecahkan 1 = bulan
+                // variabel pecahkan 2 = tanggal
+             
+                return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+
+            }
+            
             ?>
             <b>Biodata Siswa</b>
             <table class="nosut" border="0">
                 <tr>
                     <td class="jdl">
-                        <p>NIS</p>
+                        <p>No. Daftar</p>
                     </td>
                     <td class="sm"> :</td>
                     <td>
-                        <p>123</p>
+                        <p><?= $tampil['nis']; ?></p>
                     </td>
                 </tr>
                 <tr>
@@ -204,7 +184,7 @@
                     </td>
                     <td class="sm"> :</td>
                     <td>
-                        <p>Ahmad Al Gois</p>
+                        <p><?= $tampil['nama_siswa']; ?></p>
                     </td>
                 </tr>
                 <tr>
@@ -213,62 +193,78 @@
                     </td>
                     <td class="sm"> :</td>
                     <td>
-                        <p>Jln. Bekasi Raya, No. 10, Kel. Kayuringin, Kec. Bekasi Selatan</p>
+                        <p><?= $tampil['alamat']; ?></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="jdl">
+                        <p>Jenis Kelamin</p>
+                    </td>
+                    <td class="sm"> :</td>
+                    <td>
+                        <p><?= $tampil['jenis_kelamin']; ?></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="jdl">
+                        <p>Tempat Tanggal Lahir</p>
+                    </td>
+                    <td class="sm"> :</td>
+                    <td>
+                        <p><?= $tampil['tempat_lahir']; ?>, <?= tgl_indo($tgl_lahir); ?></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="jdl">
+                        <p>Agama</p>
+                    </td>
+                    <td class="sm"> :</td>
+                    <td>
+                        <p><?= $tampil['nama_agama']; ?></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="jdl">
+                        <p>Status Siswa</p>
+                    </td>
+                    <td class="sm"> :</td>
+                    <td>
+                        <p><?= $tampil['status']; ?></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="jdl">
+                        <p>Kelas/Jurusan</p>
+                    </td>
+                    <td class="sm"> :</td>
+                    <td>
+                        <p><?= $tampil['kelas']; ?></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="jdl">
+                        <p>Tanggal Daftar</p>
+                    </td>
+                    <td class="sm"> :</td>
+                    <td>
+                        <p><?= tgl_indo($tgl_daftar); ?></p>
                     </td>
                 </tr>
             </table>
         </div>
-
-        <!-- <table class="isi2" border="1" cellspacing="0">
-            <thead class="text-center">
-                <tr>
-                    <th>No</th>
-                    <th>Nama Siswa</th>
-                    <th>NISN/NIS</th>
-                    <th>Kompetensi Keahlian</th>
-                </tr>
-            </thead>
-            <tbody> -->
-        <?php
-        $no = 1;
-        // foreach ($detailsurat as $ds) 
-        {
-            // $nama = $ds->nama;
-            // $nis = $ds->nis;
-            // $jenjang = $ds->jenjang;
-            // $jurusan = $ds->jurusan;
-
-        ?>
-            <tr>
-                <td><?= $no++; ?></td>
-                <td><?= $nama; ?></td>
-                <td><?= $nis; ?></td>
-                <td><?= $jenjang; ?>
-                    <?= $jurusan; ?>
-                </td>
-            </tr>
-        <?php } ?>
-
-        </tbody>
-        </table>
-        <div>
-            <p>Adapun pelaksanaanya adalah 3 bulan yang waktunya di sesuaikan kebutuhan perusahaan/instansi.</p>
-            <p>Demikian surat pengajuan ini dibuat, atas perhatian dan kerjasamanya di ucapkan terima kasih.</p>
-        </div>
-        <div>
+        <div style="margin-top:40px;">
             <table width="660" class="ttd" border="0">
 
                 <td></td>
                 <td class="paraf">
-                    <p>Hormat Kami</p>
-                    <p>An. Kepala SMK Teratai Putih Global 2</p>
-                    <p>Waka Hubungan Industri</p><br>
-                    <p>Nuraini Sarofah, SE.</p>
+                    <p style="margin-bottom:20px;">Bekasi, <?= tgl_indo($tgl_daftar); ?></p>
+                    <p>Kepala SMK Teratai Putih Global 2 Bekasi</p><br><br>
+                    
+                    <p>Hadiswal Radin, S.Pd.I</p>
                 </td>
 
             </table>
         </div>
-    <?php } ?>
 
 </body>
 

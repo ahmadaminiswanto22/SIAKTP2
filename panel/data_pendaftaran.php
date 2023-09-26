@@ -51,6 +51,7 @@ include 'header.php';
                                             <th>Detail</th>
                                             <th>Update</th>
                                             <th>Delete</th>
+                                            <th>Cetak</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -79,6 +80,7 @@ include 'header.php';
                                                 <td><a data-toggle="modal" data-target="#detailDaftar" data-id="<?= $data['nis']; ?>" type="submit" class="btn btn-success btn-sm Detai_Pendaftaran">view</a></td>
                                                 <td align="center"><a class="btn btn-warning btn-sm" type="button" href="edit_pendaftaran.php?nis=<?= $data['nis']; ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                                                 <td align="center"><a class="btn btn-danger btn-sm" type="button" onclick="return confirm('Data akan di Hapus?')" href="hapus_pendaftaran.php?nis=<?= $data['nis']; ?>"><i class="fa fa-trash-o"></i></a></td>
+                                                <td> <a href="cetak_surat/surat.php?nis=<?= $data['nis']; ?>" target="_blank" type="button" name="cetak" class="btn btn-primary btn-sm text-white" data-dismiss="modal"><i class="fa fa-print" aria-hidden="true"></i></a></td>
                                             </tr>
                                         <?php
                                         }
@@ -141,6 +143,12 @@ include 'header.php';
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="status" class="col-md-2 col-form-label col-form-label-sm">Agama</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control form-control-sm" name="agama" id="agama" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="status" class="col-md-2 col-form-label col-form-label-sm">Status</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control form-control-sm" name="status" id="status" readonly>
@@ -190,7 +198,6 @@ include 'header.php';
                         </div>
 
                         <div class="modal-footer">
-                            <a type="button" name="cetak" class="btn btn-primary btn-sm text-white" data-dismiss="modal"><i class="fa fa-print" aria-hidden="true"></i> Cetak</a>
                             <button type="reset" name="kembali" class="btn btn-secondary btn-sm" data-dismiss="modal">Kembali</button>
                         </div>
                     </form>
@@ -257,6 +264,7 @@ include 'footer.php';
                     $('#jenis_kelamin').val(data.jenis_kelamin);
                     $('#tempat_lahir').val(data.tempat_lahir);
                     $('#tgl_lahir').val(data.tgl_lahir);
+                    $('#agama').val(data.nama_agama);
                     $('#status').val(data.status);
                     $('#nama_negara').val(data.nama_negara);
                     $('#kelas').val(data.kelas);
