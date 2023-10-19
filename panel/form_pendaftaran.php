@@ -94,7 +94,7 @@ if (isset($_POST['simpan'])) {
                             <div class="col-md-6 col-sm-6 ">
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="jk1" name="jk" class="custom-control-input" value="Laki-laki" checked>
-                                    <label class="custom-control-label" for="jk">Laki - Laki</label>
+                                    <label class="custom-control-label" for="jk1">Laki - Laki</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="jk2" name="jk" class="custom-control-input" value="Perempuan">
