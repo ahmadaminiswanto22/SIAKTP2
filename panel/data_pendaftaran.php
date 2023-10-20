@@ -77,7 +77,7 @@ include 'header.php';
                                                 <td><?= $data['alamat']; ?></td>
                                                 <td><?= $data['jenis_kelamin']; ?></td>
                                                 <!-- <td align="center"><a class="btn btn-primary" type="button" name="view" value="View" data-id="<?php echo $data["nis"]; ?>" class="btn btn-info btn-xs view_data"><i class="fa fa-bars"></i></a></td> -->
-                                                <td><a data-toggle="modal" data-target="#detailDaftar" data-id="<?= $data['nis']; ?>" type="submit" class="btn btn-success btn-sm Detai_Pendaftaran">view</a></td>
+                                                <td><a data-toggle="modal" data-target="#detailDaftar" data-id="<?= $data['nis']; ?>" type="submit" class="btn btn-success btn-sm Detail_Pendaftaran">view</a></td>
                                                 <td align="center"><a class="btn btn-warning btn-sm" type="button" href="edit_pendaftaran.php?nis=<?= $data['nis']; ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                                                 <td align="center"><a class="btn btn-danger btn-sm" type="button" onclick="return confirm('Data akan di Hapus?')" href="hapus_pendaftaran.php?nis=<?= $data['nis']; ?>"><i class="fa fa-trash-o"></i></a></td>
                                                 <td> <a href="cetak_surat/surat.php?nis=<?= $data['nis']; ?>" target="_blank" type="button" name="cetak" class="btn btn-primary btn-sm text-white" data-dismiss="modal"><i class="fa fa-print" aria-hidden="true"></i></a></td>
@@ -242,7 +242,7 @@ include 'footer.php';
         //     $('#nis').val("");
         // });
 
-        $('.Detai_Pendaftaran').on('click', function() {
+        $('.Detail_Pendaftaran').on('click', function() {
             // $('#judulKelas').html('Edit Data Kelas');
             // $('.modal-footer button[type=submit]').html('Edit');
             // $('.modal-body form').attr('action', 'edit_kelas.php');
